@@ -40,4 +40,4 @@ This platform is designed for individuals, creators, and businesses seeking to s
 
 
 
-# There are many bugs right now looking to fix it in the future.
+# There are many bugs right now, looking to fix it in the future.
