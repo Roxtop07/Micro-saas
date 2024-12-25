@@ -1,0 +1,329 @@
+/* Base styles and variables */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+}
+
+/* Typography */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+/* Layout */
+.chat-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  animation: slideIn 0.5s ease-out;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: var(--background-color);
+}
+
+/* Message styles */
+.message {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  animation: popIn 0.3s ease-out forwards;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.ai {
+  justify-content: flex-start;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  line-height: 1.5;
+  box-shadow: var(--box-shadow);
+}
+
+.message.user .message-content {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.message.ai .message-content {
+  background-color: #e9ecef;
+  color: var(--text-color);
+}
+
+/* Input area */
+.chat-input-container {
+  display: flex;
+  padding: 15px;
+  background-color: white;
+  border-top: 1px solid #e9ecef;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  margin-right: 10px;
+  font-size: 16px;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.send-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+}
+
+.send-button:hover {
+  background-color: #2980b9;
+}
+
+.send-button:active {
+  transform: translateY(1px);
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.action-button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+}
+
+.action-button:hover {
+  background-color: #27ae60;
+}
+
+.action-button:active {
+  transform: translateY(1px);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.loading-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  background-color: #e9ecef;
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  animation: typingDot 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
+
+/* File upload area */
+.upload-area {
+  border: 2px dashed #ddd;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+  transition: all var(--transition-speed) ease;
+}
+
+.upload-area:hover {
+  border-color: var(--primary-color);
+  background-color: #f8fafc;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 95vh;
+  }
+
+  .message-content {
+    max-width: 80%;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Custom scrollbar */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #2980b9;
+}
+
+/* Loading and Error States */
+.loading-indicator, 
+.error-message {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+}
+
+.loading-indicator {
+  color: var(--primary-color);
+}
+
+.error-message {
+  color: #e74c3c;
+  background-color: #f8d7da;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a1a1a;
+    --text-color: #f4f4f4;
+  }
+
+  .chat-container {
+    background-color: #2a2a2a;
+  }
+
+  .chat-input-container {
+    background-color: #2a2a2a;
+    border-top-color: #444;
+  }
+
+  .chat-input {
+    background-color: #333;
+    color: var(--text-color);
+    border-color: #555;
+  }
+
+  .message.ai .message-content {
+    background-color: #3a3a3a;
+    color: var(--text-color);
+  }
+
+  .typing-indicator {
+    background-color: #3a3a3a;
+  }
+
+  .upload-area {
+    border-color: #555;
+  }
+
+  .upload-area:hover {
+    background-color: #2a2a2a;
+  }
+}
+
